@@ -21,6 +21,10 @@ Route::get('/', function () {
 
 Route::get('/students', [StudentsController::class, 'index']);
 
+Route::get('/students/create', [StudentsController::class, 'create']);
+
+Route::post('/students', [StudentsController::class, 'store']);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
