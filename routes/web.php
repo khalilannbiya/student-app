@@ -19,15 +19,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/students', [StudentsController::class, 'index'])->name('students.index');
-
-Route::post('/students', [StudentsController::class, 'store'])->name('students.store');
-
-Route::get('/students/create', [StudentsController::class, 'create'])->name('students.create');
-
-Route::get('/students/{id}/edit', [StudentsController::class, 'edit'])->name('students.edit');
-
-Route::put('/students/{id}', [StudentsController::class, 'update'])->name('students.update');
+Route::controller(StudentsController::class)->group(function () {
+    Route::get('/students', 'index')->name('students.index');
+    Route::post('/students', 'store')->name('students.store');
+    Route::get('/students/create', 'create')->name('students.create');
+    Route::get('/students/{id}/edit', 'edit')->name('students.edit');
+    Route::put('/students/{id}', 'update')->name('students.update');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
