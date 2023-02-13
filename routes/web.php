@@ -25,6 +25,7 @@ Route::controller(StudentsController::class)->group(function () {
     Route::get('/students/create', 'create')->name('students.create');
     Route::get('/students/{id}/edit', 'edit')->name('students.edit');
     Route::put('/students/{id}', 'update')->name('students.update');
+    Route::delete('/students/{id}', 'destroy')->name('students.destroy');
 });
 
 Route::get('/dashboard', function () {

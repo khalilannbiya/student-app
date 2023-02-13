@@ -52,4 +52,12 @@ class StudentsController extends Controller
         $student->save();
         return redirect()->route('students.index');
     }
+
+    public function destroy(string $id)
+    {
+        $student = Student::find($id);
+        $student->delete();
+
+        return redirect()->route('students.index');
+    }
 }

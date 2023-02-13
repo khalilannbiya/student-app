@@ -29,7 +29,7 @@ $preTitle = "Students App";
                         <th>Address</th>
                         <th>Phone Number</th>
                         <th>Class</th>
-                        <th class="w-1"></th>
+                        <th class="w-1">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,7 +45,13 @@ $preTitle = "Students App";
                             {{ $student->class }}
                         </td>
                         <td>
-                            <a href="{{ route('students.edit', ['id' => $student->id])  }}">Edit</a>
+                            <a href="{{ route('students.edit', ['id' => $student->id])  }}"
+                                class="btn btn-success btn-sm w-100">Edit</a>
+                            <form action="{{ route('students.destroy', ['id' => $student->id]) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm w-100" type="submit">Delete</button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach
