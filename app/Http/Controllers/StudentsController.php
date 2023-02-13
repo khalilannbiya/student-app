@@ -31,4 +31,25 @@ class StudentsController extends Controller
         $student->save();
         return redirect()->route('students.index');
     }
+
+    public function edit(string $id)
+    {
+        $student = Student::find($id);
+        return view('students.edit', [
+            "student" => $student
+        ]);
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $student = Student::find($id);
+
+        $student->name = $request->input('name');
+        $student->address = $request->input('address');
+        $student->phone_number = $request->input('phone_number');
+        $student->class = $request->input('class');
+
+        $student->save();
+        return redirect()->route('students.index');
+    }
 }

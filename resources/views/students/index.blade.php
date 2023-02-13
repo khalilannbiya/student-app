@@ -36,7 +36,7 @@ $preTitle = "Students App";
                             {{ $student->class }}
                         </td>
                         <td>
-                            <a href="#">Edit</a>
+                            <a href="{{ route('students.edit', ['id' => $student->id])  }}">Edit</a>
                         </td>
                     </tr>
                     @endforeach

@@ -25,6 +25,10 @@ Route::post('/students', [StudentsController::class, 'store'])->name('students.s
 
 Route::get('/students/create', [StudentsController::class, 'create'])->name('students.create');
 
+Route::get('/students/{id}/edit', [StudentsController::class, 'edit'])->name('students.edit');
+
+Route::put('/students/{id}', [StudentsController::class, 'update'])->name('students.update');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
