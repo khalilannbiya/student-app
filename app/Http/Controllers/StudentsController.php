@@ -29,6 +29,6 @@ class StudentsController extends Controller
         $student->class = $request->input('class');
 
         $student->save();
-        return redirect('/students');
+        return redirect()->route('students.index');
     }
 }

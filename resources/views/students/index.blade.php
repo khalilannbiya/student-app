@@ -1,5 +1,14 @@
 @extends('templates.default')
 
+@php
+$title = "Students Data";
+$preTitle = "Students App";
+@endphp
+
+@push('page-action')
+<a href="{{ route('students.create') }}" class="btn btn-primary">Add Data</a>
+@endpush
+
 @section('content')
 <div class="col-lg-8">
     <div class="card">

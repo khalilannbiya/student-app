@@ -19,11 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/students', [StudentsController::class, 'index']);
+Route::get('/students', [StudentsController::class, 'index'])->name('students.index');
 
-Route::get('/students/create', [StudentsController::class, 'create']);
+Route::post('/students', [StudentsController::class, 'store'])->name('students.store');
 
-Route::post('/students', [StudentsController::class, 'store']);
+Route::get('/students/create', [StudentsController::class, 'create'])->name('students.create');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
