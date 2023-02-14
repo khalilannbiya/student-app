@@ -10,7 +10,9 @@ class StudentsController extends Controller
     public function index()
     {
         return view('students.index', [
-            "students" => Student::get()
+            "students" => Student::get(),
+            "title" => "Students Data",
+            "preTitle" => "Students App"
         ]);
     }
 
@@ -29,6 +31,9 @@ class StudentsController extends Controller
         $student->class = $request->input('class');
 
         $student->save();
+
+        session()->flash('success', "Data Berhasil Ditambahan");
+
         return redirect()->route('students.index');
     }
 
@@ -50,6 +55,9 @@ class StudentsController extends Controller
         $student->class = $request->input('class');
 
         $student->save();
+
+        session()->flash('success', "Data Berhasil Diperbarui");
+
         return redirect()->route('students.index');
     }
 
@@ -58,6 +66,7 @@ class StudentsController extends Controller
         $student = Student::find($id);
         $student->delete();
 
+        session()->flash('success', "Data dengan Id $student->id Berhasil Dihapus");
         return redirect()->route('students.index');
     }
 }
