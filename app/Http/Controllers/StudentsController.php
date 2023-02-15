@@ -10,7 +10,8 @@ class StudentsController extends Controller
     public function index()
     {
         return view('students.index', [
-            "students" => Student::get(),
+            // "students" => Student::get(), // Data terbaru dibawah
+            "students" => Student::latest()->get(), // Data terbaru diatas
             "title" => "Students Data",
             "preTitle" => "Students App"
         ]);
@@ -23,6 +24,13 @@ class StudentsController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => ['required', 'min:3'],
+            'address' => ['required', 'min:10'],
+            'phone_number' => ['required', 'numeric'],
+            'class' => ['required'],
+        ]);
+
         $student = new Student();
 
         $student->name = $request->input('name');
