@@ -7,7 +7,7 @@ $title= "Edit Data";
 @section('content')
 <div class="card">
     <div class="card-body">
-        <form action="{{ route('students.update', ['id' => $student->id]) }}" method="post">
+        <form action="{{ route('students.update', $student->id) }}" method="post">
             @csrf
             @method('PUT')
             <div class="mb-3">

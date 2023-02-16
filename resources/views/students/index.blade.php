@@ -40,9 +40,9 @@
                             {{ $student->class }}
                         </td>
                         <td>
-                            <a href="{{ route('students.edit', ['id' => $student->id])  }}"
+                            <a href="{{ route('students.edit', $student->id)  }}"
                                 class="btn btn-success btn-sm w-100">Edit</a>
-                            <form action="{{ route('students.destroy', ['id' => $student->id]) }}" method="post">
+                            <form action="{{ route('students.destroy',  $student->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger btn-sm w-100" type="submit">Delete</button>
