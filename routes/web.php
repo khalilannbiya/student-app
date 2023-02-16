@@ -28,7 +28,7 @@ Route::get('/', function () {
 //     Route::delete('/students/{id}', 'destroy')->name('students.destroy');
 // });
 
-Route::resource('students', StudentsController::class);
+Route::resource('students', StudentsController::class)->middleware('auth');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
