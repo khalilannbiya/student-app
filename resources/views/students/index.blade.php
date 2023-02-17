@@ -42,7 +42,7 @@
                         <td class="text-muted"><a href="tel:{{ $student->phone_number }}" class="text-reset">{{
                                 $student->phone_number }}</a></td>
                         <td class="text-muted">
-                            {{ $student->class }}
+                            {{ $student->studentClass->name }}
                         </td>
                         <td>
                             <a href="{{ route('students.edit', $student->id)  }}"

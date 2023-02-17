@@ -50,6 +50,18 @@ $title = "Add Data";
             </div>
 
             <div class="mb-3">
+                <label class="form-label" for="student_class_id">Kelas</label>
+                <select class="form-control" name="student_class_id" id="student_class_id">
+                    @foreach ($classes as $class)
+                    <option value="{{ $class->id }}">{{ $class->name }}</option>
+                    @endforeach
+                </select>
+                @error('class')
+                <span class="invalid-feedback">{{ $message }}</>
+                    @enderror
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label" for="photo">Foto</label>
                 <input type="file" id="photo" class="form-control @error('photo')
                 is-invalid

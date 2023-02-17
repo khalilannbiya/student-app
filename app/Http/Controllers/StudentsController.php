@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\StudentClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,7 +21,9 @@ class StudentsController extends Controller
 
     public function create()
     {
-        return view('students.create');
+        return view('students.create', [
+            "classes" => StudentClass::get()
+        ]);
     }
 
     public function store(Request $request)
@@ -46,6 +49,7 @@ class StudentsController extends Controller
         $student->address = $request->input('address');
         $student->phone_number = $request->input('phone_number');
         $student->class = $request->input('class');
+        $student->student_class_id = $request->input('student_class_id');
         $student->photo = $photo;
 
         $student->save();
