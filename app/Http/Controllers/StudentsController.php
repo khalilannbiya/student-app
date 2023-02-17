@@ -79,7 +79,7 @@ class StudentsController extends Controller
 
         $photo = $student->photo;
         if ($request->hasFile('photo')) {
-            if (Storage::exists($student->photo)) {
+            if (Storage::exists($student->photo) && $student->photo != 'photos/default.jpg') {
                 Storage::delete($student->photo);
             }
             $photo = $request->file('photo')->storePublicly("photos", "public");
