@@ -33,6 +33,7 @@ class StudentsController extends Controller
             'address' => ['required', 'min:10'],
             'phone_number' => ['required', 'numeric'],
             'class' => ['required'],
+            'student_class_id' => ['required'],
             'photo' => ['image'],
         ]);
 

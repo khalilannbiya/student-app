@@ -51,12 +51,15 @@ $title = "Add Data";
 
             <div class="mb-3">
                 <label class="form-label" for="student_class_id">Kelas</label>
-                <select class="form-control" name="student_class_id" id="student_class_id">
+                <select class="form-control @error('student_class_id')
+                is-invalid
+            @enderror" name="student_class_id" id="student_class_id">
+                    <option value="">Pilih Kelas</option>
                     @foreach ($classes as $class)
                     <option value="{{ $class->id }}">{{ $class->name }}</option>
                     @endforeach
                 </select>
-                @error('class')
+                @error('student_class_id')
                 <span class="invalid-feedback">{{ $message }}</>
                     @enderror
             </div>
