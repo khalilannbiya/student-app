@@ -33,13 +33,8 @@
                     <tr>
                         <td>{{ $student->name }}</td>
                         <td>
-                            @if (!$student->photo)
-                            <img src="{{ asset('storage/photos/default.jpg') }}" width="100px" alt="{{ " Photo
-                                $student->name" }}">
-                            @else
                             <img src="{{ asset('storage/' . $student->photo) }}" width="100px" alt="{{ " Photo
                                 $student->name" }}">
-                            @endif
                         </td>
                         <td class="text-muted">
                             {{ $student->address }}

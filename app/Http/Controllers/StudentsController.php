@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class StudentsController extends Controller
 {
@@ -32,7 +33,7 @@ class StudentsController extends Controller
             'photo' => ['image'],
         ]);
 
-        $photo = null;
+        $photo = "photos/default.jpg";
 
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo')->storePublicly("photos", "public");
@@ -58,7 +59,8 @@ class StudentsController extends Controller
     {
         $student = Student::find($id);
         return view('students.edit', [
-            "student" => $student
+            "student" => $student,
+            "title" => "Edit Data"
         ]);
     }
 
@@ -70,14 +72,24 @@ class StudentsController extends Controller
             'address' => ['required', 'min:10'],
             'phone_number' => ['required', 'numeric'],
             'class' => ['required'],
+            'photo' => ['image'],
         ]);
 
         $student = Student::find($id);
+
+        $photo = $student->photo;
+        if ($request->hasFile('photo')) {
+            if (Storage::exists($student->photo)) {
+                Storage::delete($student->photo);
+            }
+            $photo = $request->file('photo')->storePublicly("photos", "public");
+        }
 
         $student->name = $request->input('name');
         $student->address = $request->input('address');
         $student->phone_number = $request->input('phone_number');
         $student->class = $request->input('class');
+        $student->photo = $photo;
 
         $student->save();
 
