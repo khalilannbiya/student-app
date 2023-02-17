@@ -29,7 +29,15 @@ class StudentsController extends Controller
             'address' => ['required', 'min:10'],
             'phone_number' => ['required', 'numeric'],
             'class' => ['required'],
+            'photo' => ['image'],
         ]);
+
+        $photo = null;
+
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo')->storePubliclyAs("photos", "photo-" . $request->input('name') . "." . $request->photo->extension(), "public");
+        }
+
 
         $student = new Student();
 
@@ -37,6 +45,7 @@ class StudentsController extends Controller
         $student->address = $request->input('address');
         $student->phone_number = $request->input('phone_number');
         $student->class = $request->input('class');
+        $student->photo = $photo;
 
         $student->save();
 

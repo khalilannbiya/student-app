@@ -7,7 +7,7 @@ $title = "Add Data";
 @section('content')
 <div class="card">
     <div class="card-body">
-        <form action="{{ route('students.store') }}" method="post">
+        <form action="{{ route('students.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label class="form-label" for="name">Nama</label>
@@ -18,6 +18,7 @@ $title = "Add Data";
                 <span class="invalid-feedback">{{ $message }}</>
                     @enderror
             </div>
+
             <div class="mb-3">
                 <label class="form-label" for="address">Alamat</label>
                 <input type="text" id="address" class="form-control @error('address')
@@ -27,6 +28,7 @@ $title = "Add Data";
                 <span class="invalid-feedback">{{ $message }}</>
                     @enderror
             </div>
+
             <div class="mb-3">
                 <label class="form-label" for="phone_number">Nomor Telepon</label>
                 <input type="text" id="phone_number" class="form-control @error('phone_number')
@@ -36,12 +38,23 @@ $title = "Add Data";
                 <span class="invalid-feedback">{{ $message }}</>
                     @enderror
             </div>
+
             <div class="mb-3">
                 <label class="form-label" for="class">Kelas</label>
                 <input type="text" id="class" class="form-control @error('class')
                 is-invalid
             @enderror" name="class" placeholder="Input Kelas" value="{{ old('class') }}">
                 @error('class')
+                <span class="invalid-feedback">{{ $message }}</>
+                    @enderror
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="photo">Foto</label>
+                <input type="file" id="photo" class="form-control @error('photo')
+                is-invalid
+            @enderror" name="photo" placeholder="Input Kelas" value="{{ old('photo') }}">
+                @error('photo')
                 <span class="invalid-feedback">{{ $message }}</>
                     @enderror
             </div>
