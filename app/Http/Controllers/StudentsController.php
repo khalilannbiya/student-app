@@ -35,7 +35,7 @@ class StudentsController extends Controller
         $photo = null;
 
         if ($request->hasFile('photo')) {
-            $photo = $request->file('photo')->storePubliclyAs("photos", "photo-" . $request->input('name') . "." . $request->photo->extension(), "public");
+            $photo = $request->file('photo')->storePublicly("photos", "public");
         }
 
 
