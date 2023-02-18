@@ -115,6 +115,18 @@ class StudentsController extends Controller
     public function destroy(string $id)
     {
         $student = Student::find($id);
+        /**
+         * Temukan di storage apakah ada file image yang sesuai dengan data image di database,
+         * namun jika data di database adalah photos/default.jpg maka jangan lakukan perintah if dibawah
+         * */
+        if (Storage::exists($student->photo) && $student->photo != 'photos/default.jpg') {
+            /**
+             * Jika ada maka hapus file image dari storage. Tujuannya adalah agar menghapus data duplikat.
+             * Maka jika update image baru, file image yang lama akan dihapus lalu di gantikan dengan yang baru
+             */
+            Storage::delete($student->photo);
+        }
+
         $student->delete();
 
         session()->flash('success', "Data dengan Id $student->id Berhasil Dihapus");
