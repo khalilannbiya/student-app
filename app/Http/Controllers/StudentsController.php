@@ -22,7 +22,8 @@ class StudentsController extends Controller
     public function create()
     {
         return view('students.create', [
-            "classes" => StudentClass::get()
+            "classes" => StudentClass::get(),
+            "title" => "Add Data"
         ]);
     }
 
@@ -32,7 +33,6 @@ class StudentsController extends Controller
             'name' => ['required', 'min:3'],
             'address' => ['required', 'min:10'],
             'phone_number' => ['required', 'numeric'],
-            'class' => ['required'],
             'student_class_id' => ['required'],
             'photo' => ['image'],
         ]);
@@ -49,7 +49,6 @@ class StudentsController extends Controller
         $student->name = $request->input('name');
         $student->address = $request->input('address');
         $student->phone_number = $request->input('phone_number');
-        $student->class = $request->input('class');
         $student->student_class_id = $request->input('student_class_id');
         $student->photo = $photo;
 
@@ -65,6 +64,7 @@ class StudentsController extends Controller
         $student = Student::find($id);
         return view('students.edit', [
             "student" => $student,
+            "classes" => StudentClass::get(),
             "title" => "Edit Data"
         ]);
     }
@@ -76,7 +76,7 @@ class StudentsController extends Controller
             'name' => ['required', 'min:3'],
             'address' => ['required', 'min:10'],
             'phone_number' => ['required', 'numeric'],
-            'class' => ['required'],
+            'student_class_id' => ['required'],
             'photo' => ['image'],
         ]);
 
@@ -93,7 +93,7 @@ class StudentsController extends Controller
         $student->name = $request->input('name');
         $student->address = $request->input('address');
         $student->phone_number = $request->input('phone_number');
-        $student->class = $request->input('class');
+        $student->student_class_id = $request->input('student_class_id');
         $student->photo = $photo;
 
         $student->save();

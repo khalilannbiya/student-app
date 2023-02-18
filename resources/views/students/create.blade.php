@@ -1,9 +1,5 @@
 @extends('templates.default')
 
-@php
-$title = "Add Data";
-@endphp
-
 @section('content')
 <div class="card">
     <div class="card-body">
@@ -40,23 +36,14 @@ $title = "Add Data";
             </div>
 
             <div class="mb-3">
-                <label class="form-label" for="class">Kelas</label>
-                <input type="text" id="class" class="form-control @error('class')
-                is-invalid
-            @enderror" name="class" placeholder="Input Kelas" value="{{ old('class') }}">
-                @error('class')
-                <span class="invalid-feedback">{{ $message }}</>
-                    @enderror
-            </div>
-
-            <div class="mb-3">
                 <label class="form-label" for="student_class_id">Kelas</label>
                 <select class="form-control @error('student_class_id')
                 is-invalid
             @enderror" name="student_class_id" id="student_class_id">
                     <option value="">Pilih Kelas</option>
                     @foreach ($classes as $class)
-                    <option value="{{ $class->id }}">{{ $class->name }}</option>
+                    <option value="{{ $class->id }}" @selected($class->id == old('student_class_id'))>{{ $class->name }}
+                    </option>
                     @endforeach
                 </select>
                 @error('student_class_id')

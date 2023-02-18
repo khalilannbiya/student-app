@@ -38,11 +38,17 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label" for="class">Kelas</label>
-                <input type="text" id="class" class="form-control @error('class')
+                <label class="form-label" for="student_class_id">Kelas</label>
+                <select class="form-control @error('student_class_id')
                 is-invalid
-            @enderror" name="class" placeholder="Input Kelas" value="{{ old('class') ?? $student->class }}">
-                @error('class')
+            @enderror" name="student_class_id" id="student_class_id">
+                    @foreach ($classes as $class)
+                    <option value="{{ $class->id }}" @selected($class->id ==
+                        $student->student_class_id)>{{ $class->name }}
+                    </option>
+                    @endforeach
+                </select>
+                @error('student_class_id')
                 <span class="invalid-feedback">{{ $message }}</>
                     @enderror
             </div>
