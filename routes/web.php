@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StudentClassesController;
 use App\Http\Controllers\StudentsController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,8 @@ Route::get('/', function () {
 // });
 
 Route::resource('students', StudentsController::class)->middleware('auth');
+
+Route::resource('student-classes', StudentClassesController::class)->middleware('auth');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
