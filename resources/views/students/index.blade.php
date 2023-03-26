@@ -33,8 +33,9 @@
                     <tr>
                         <td>{{ $student->name }}</td>
                         <td>
-                            <img src="{{ asset('storage/' . $student->photo) }}" width="100px" alt="{{ " Photo
-                                $student->name" }}">
+                            <img src="{{ Storage::exists('public/' . $student->photo) ? asset('storage/' . $student->photo) : "
+                                data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" }}"
+                                width="100px" alt="{{ " Photo $student->name" }}">
                         </td>
                         <td class="text-muted">
                             {{ $student->address }}
