@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Models\Student;
 use App\Models\StudentClass;
 use Illuminate\Http\Request;
@@ -131,5 +133,35 @@ class StudentsController extends Controller
 
         session()->flash('success', "Data dengan Id $student->id Berhasil Dihapus");
         return redirect()->route('students.index');
+    }
+
+    public function exportPdf()
+    {
+        // Set options
+        $options = new Options();
+        $options->set('defaultPaperSize', 'A4');
+        $options->set('defaultFont', 'Arial');
+        $options->set('dpi', 150);
+        $options->set('isRemoteEnabled', true);
+        $options->set('isHtml5ParserEnabled', true);
+
+        // Instantiate Dompdf
+        $dompdf = new Dompdf($options);
+
+        // Get students data
+        $students = Student::all();
+
+        // Load view
+        $view = view('students.pdf', compact('students'));
+        $dompdf->loadHtml($view->render());
+
+        // Set paper size and orientation
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render PDF
+        $dompdf->render();
+
+        // Generate PDF file and download
+        return $dompdf->stream('students.pdf');
     }
 }

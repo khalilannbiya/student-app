@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentClassesController;
 use App\Http\Controllers\StudentsController;
+use App\Models\Student;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,7 +31,11 @@ Route::get('/', function () {
 //     Route::delete('/students/{id}', 'destroy')->name('students.destroy');
 // });
 
-Route::resource('students', StudentsController::class)->middleware('auth');
+Route::resource('students', StudentsController::class)->middleware('auth')->only([
+    'index', 'create', 'store', 'edit', 'update', 'destroy'
+]);
+
+Route::get('/students/pdf', [StudentsController::class, 'exportPdf'])->name('students.exportPdf')->middleware('auth');
 
 Route::resource('student-classes', StudentClassesController::class)->middleware('auth');
 
